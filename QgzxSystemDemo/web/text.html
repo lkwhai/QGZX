@@ -1,0 +1,48 @@
+<%--
+Created by IntelliJ IDEA.
+User: 17566
+Date: 2019/10/13
+Time: 15:11
+To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
+<html>
+
+<head><script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        function showAdress()
+        {
+            var str = document.getElementById("text").value;
+            $.ajax
+            ({
+                url: "https://restapi.amap.com/v3/geocode/geo",
+                dataType: "json",
+                type: "get",
+                data: {
+                    address: str,
+                    key: "7486e10d3ca83a934438176cf941df0c",
+                },
+                success:function(data){
+                    alert(data.geocodes[0].formatted_address+"经纬度："+data.geocodes[0].location);
+                    console.log(data);  //在console中查看数据
+                },
+                error:function(){
+                    alert('failed!');
+                },
+            });
+        }
+    </script>
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <form name="form">
+        <span>输入地址：</span><input id="text" class="textbox" type="text"/>
+        <input class="button" type="button" value="获取经纬度" onclick="showAdress()"/>
+    </form>
+</div>
+
+</body>
+</html>

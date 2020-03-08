@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <script type="text/javascript">
+        function printtable()
+        {
+            $.ajax({
+                url:'http://hebutgo.com:8080/maps/getMapsList',
+                type:'get',
+                datatype:'json',
+                success:function(res)
+                {
+                    console.log(res);  //在console中查看数据
+                    $.each(res.result,function(index,obj){
+                        $("#table").append(
+                            "<tr><td>"+obj['申请人省份']+"</td>"+
+                            "<td>"+obj['counts']+"</td><tr>");
+                    });
+
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<div class="main">
+    <table id="table">
+        <tr>
+            <th>
+                申请人省份
+            </th>
+            <th>
+                数量
+            </th>
+        </tr>
+    </table>
+    <input type="button" value="PRINT" onclick="printtable()"/>
+</div>
+
+</body>
+</html>
